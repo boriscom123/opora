@@ -1,0 +1,10 @@
+version: 1
+services:
+  mcp:
+    endpoint: http://localhost:5000
+    commands:
+      find:
+        description: "Find files by path fragment"
+        method: GET
+        path: "/{path_fragment}"
+        response_type: json

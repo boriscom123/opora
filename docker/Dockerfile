@@ -10,7 +10,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем остальные файлы проекта
-COPY . .
+COPY .. .
 
 # Открываем порт, который будет использовать Flask
 EXPOSE 5000

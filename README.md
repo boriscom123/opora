@@ -1,18 +1,57 @@
 # opora
+
 Опора Стандарт - тестовое задание
 
-## Python запускается в контейнере docker и доступен локально по ссылке:
-`http://127.0.0.1:5000/search?path=${path_fragment}`
+## Создание MCP сервиса для поиска файлов
 
-### Комапнда для сборки и запуска:
-`docker compose up -d --build`
+Запуск сервиса:
 
-## Ответ предоставляется в JSON Пример:
-`[
-  {
-    "creation_date": "2025-02-24 05:39:49",
-    "file_name": ".python_history",
-    "file_path": "/root/.python_history",
-    "file_size": 0
-  },
-]`
+```bash
+python mcp_server.py
+```
+
+Пример ответа от сервера (сервер доступен на порту 8080):
+
+```json
+[
+    {
+        "name": "example.txt",
+        "path": "./documents/example.txt",
+        "size": 1024,
+        "creation_time": "2023-10-01 12:34:56"
+    },
+    {
+        "name": "example_backup.txt",
+        "path": "./backups/example_backup.txt",
+        "size": 2048,
+        "creation_time": "2023-10-02 14:20:30"
+    }
+]
+```
+
+Команда для сазуска скрипта Cline:
+
+```bash
+cline mcp find example
+```
+
+Пример задачи для выполнения Cline
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Find files with Cline",
+            "type": "shell",
+            "command": "cline",
+            "args": ["mcp", "find", "example"],
+                "group": {
+                        "kind": "build",
+                        "isDefault": true
+                    },
+                "problemMatcher": []
+        }
+    ]
+}
+```
